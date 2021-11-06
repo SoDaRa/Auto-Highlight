@@ -32,10 +32,9 @@ define config.version = "1.0"
 define gui.about = _p("""
 Code by {a=https://wattson.itch.io/}Wattson{/a}
 
-Writing by the {a=https://discord.gg/GFjSPkh}FVN Discord{/a} Voice chat. (Do not join if you are a minor)
+Luke and Kota sprites have been used with permission from Minotaur Hotel. {a=https://minoh.itch.io/minotaur-hotel-sfw}https://minoh.itch.io/minotaur-hotel-sfw{/a}
 
-Luke and Kota sprites have been used with permission from Minotaur Hotel. {a=https://minoh.itch.io/minotaur-hotel-sfw}https://minoh.itch.io/minotaur-hotel-sfw{/a}\n
-
+Writing by the {a=https://discord.gg/GFjSPkh}FVN Discord{/a} Voice chat. \n\n{b}FVN is an 18+ server! Do not join if you are a minor!{/b}
 """)
 
 

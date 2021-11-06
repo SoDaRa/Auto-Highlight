@@ -6,3 +6,5 @@ log.txt
 errors.txt
 traceback.txt
 game/cache/shaders.txt
+game/saves/navigation.json
+game/tl/None/common.rpymc
