@@ -1,0 +1,8 @@
+*.rpyb
+*.save
+game/saves/navigation.json
+game/saves/persistent
+log.txt
+errors.txt
+traceback.txt
+game/cache/shaders.txt
