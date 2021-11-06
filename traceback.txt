@@ -1,0 +1,66 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+While running game code:
+  File "renpy/common/00keymap.rpy", line 469, in script
+    python hide:
+  File "renpy/common/00keymap.rpy", line 469, in script
+    python hide:
+  File "renpy/common/00keymap.rpy", line 469, in <module>
+    python hide:
+  File "renpy/common/00keymap.rpy", line 488, in _execute_python_hide
+    renpy.save("_reload-1", "reload save game")
+AttributeError: 'NoneType' object has no attribute 'stores'
+
+-- Full Traceback ------------------------------------------------------------
+
+Full traceback:
+  File "renpy/bootstrap.py", line 326, in bootstrap
+    renpy.main.main()
+  File "renpy/main.py", line 505, in main
+    if renpy.parser.report_parse_errors():
+  File "renpy/parser.py", line 3015, in report_parse_errors
+    renpy.display.error.report_parse_errors(full_text, error_fn)
+  File "renpy/display/error.py", line 194, in report_parse_errors
+    error_fn=error_fn,
+  File "renpy/game.py", line 284, in invoke_in_new_context
+    return callable(*args, **kwargs)
+  File "renpy/display/error.py", line 46, in call_exception_screen
+    return renpy.ui.interact(mouse="screen", type="screen", suppress_overlay=True, suppress_underlay=True)
+  File "renpy/ui.py", line 298, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "renpy/display/core.py", line 3276, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
+  File "renpy/display/core.py", line 3757, in interact_core
+    renpy.loader.check_autoreload()
+  File "renpy/loader.py", line 1129, in check_autoreload
+    renpy.exports.reload_script()
+  File "renpy/exports.py", line 1863, in reload_script
+    renpy.game.call_in_new_context("_save_reload_game")
+  File "renpy/game.py", line 344, in call_in_new_context
+    return renpy.execution.run_context(False)
+  File "renpy/execution.py", line 922, in run_context
+    context.run()
+  File "renpy/common/00keymap.rpy", line 469, in script
+    python hide:
+  File "renpy/common/00keymap.rpy", line 469, in script
+    python hide:
+  File "renpy/ast.py", line 923, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "renpy/python.py", line 2235, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "renpy/common/00keymap.rpy", line 469, in <module>
+    python hide:
+  File "renpy/common/00keymap.rpy", line 488, in _execute_python_hide
+    renpy.save("_reload-1", "reload save game")
+  File "renpy/loadsave.py", line 394, in save
+    roots = renpy.game.log.freeze(None)
+  File "renpy/python.py", line 2132, in freeze
+    self.complete(False)
+  File "renpy/python.py", line 1726, in complete
+    self.current.stores[name], self.current.delta_ebc[name] = sd.get_changes(begin)
+AttributeError: 'NoneType' object has no attribute 'stores'
+
+Windows-10-10.0.19041
+Ren'Py 7.4.8.1895
+Auto Highlight 1.0
+Thu Nov  4 16:02:02 2021
