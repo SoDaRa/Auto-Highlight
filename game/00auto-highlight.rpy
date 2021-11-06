@@ -6,7 +6,7 @@
  I'd appreciate being given credit if you do end up using it! :D Would really
  make my day to know I helped some people out!
  http://opensource.org/licenses/mit-license.php
- Github:
+ Github: https://github.com/SoDaRa/Auto-Highlight
  itch.io: https://wattson.itch.io/renpy-auto-highlight
 """
 # Permission is hereby granted, free of charge, to any person
