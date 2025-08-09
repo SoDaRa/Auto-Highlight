@@ -5,6 +5,7 @@
 
 define kota = Character('Kota', callback=name_callback, cb_name='kot', image='ko')
 define luke = Character('Luke', callback=name_callback, cb_name='luke', image='luke')
+define both = Character('Both', callback=name_callback, cb_name=['luke', 'kot'])
 
 layeredimage ko:
     at sprite_highlight('kot')
@@ -51,29 +52,46 @@ layeredimage ko:
     group emote auto:
         attribute neutral default
 
-layeredimage luke:
-    at sprite_highlight('luke')
+# This is example of a character who I want to have two different focuses. One normal and one to represent them at a distance.
+# So we need to break the sprite_highlight out of the main layeredimage, and define a general layeredimage for both to use.
+# I usually name them with a '1' so the usual one still available. And if they had a seperate pose that required a different
+# layeredimage, I can define a 'luke2', 'luke3', etc.
+layeredimage luke1:
     always:
-        'luke_wings_neutral'
+        'luke1_wings_neutral'
     group arm auto:
         attribute hip default
     always:
-        'luke_body_neutral'
+        'luke1_body_neutral'
 
     group clothes auto:
         attribute tankpants default
     group emote auto:
         attribute neutral default
     attribute bandanna if_any['crying', 'cocky', 'happy', 'wink']:
-        'luke_bandanna_front'
+        'luke1_bandanna_front'
     attribute bandanna if_any['annoyed', 'laughing', 'neutral', 'sad', 'surprised']:
-        'luke_bandanna_side'
+        'luke1_bandanna_side'
     attribute bandanna if_any['hysterical']:
-        'luke_bandanna_hysterical'
+        'luke1_bandanna_hysterical'
     attribute glasses if_any['cocky', 'crying', 'happy', 'wink']:
-        'luke_glasses_front'
+        'luke1_glasses_front'
     attribute glasses if_any['annoyed', 'laughing', 'neutral', 'sad', 'surprised']:
-        'luke_glasses_side'
+        'luke1_glasses_side'
+# This crop is used for the "phone" version of the sprite and references the PhoneFocus.
+transform sprite_phone_tf_luke(child):
+    contains:
+        'phone_backing' 
+    contains:
+        AlphaMask(Transform(child, crop=(100, 0, 400, 601)), 'phone_mask')
+    contains:
+        'phone_border' 
+    xysize(400, 601)
+    yalign 0.3
+    function PhoneFocus('luke')
+# Here we define both of the sprites to be used.
+image luke       = LayeredImageProxy('luke1', transform=sprite_highlight('luke'))
+image luke phone = LayeredImageProxy('luke1', sprite_phone_tf_luke)
 
 image black = Solid('#000')
 image bg room = Solid('#606060')
@@ -87,12 +105,12 @@ label start:
 
     "Unlike my other code projects, there isn't much I feel the need to say in the demo script to show it off."
     "So I outsourced the writing for this one to a group chat and put in whatever they said."
-    show ko sad kimono mug at left
+    show ko happy kimono mug at left
     show luke bandanna at right
     with dissolve
     # These display lines of dialogue.
-
-    kota "Oh god, not tonight. Not tonight of all nights."
+    both "Hey! Tonight I'm gonna have a feast!"
+    kota sad "Oh god, not you too... Not tonight of all nights."
     luke cocky "You're not weaseling your way out of this one. It's an All-American fourth of July and we're lighting kerosene."
     show luke neutral
     kota surprise relaxed "But I need the matches in order to cook the dinner for Onsen."
@@ -102,8 +120,15 @@ label start:
     kota puzzled "Darn it, Luke from the critically-acclaimed, award-winning visual novel, Minotaur Hotel, now with a free SFW version available for download on {a=https://minoh.itch.io/minotaur-hotel-sfw}itch.io{/a}, Onsen and I are gonna have ramen."
     luke glasses laughing salute "Time to rock-and-rolllllllll!!!"
     kota sad "I will not be doing any \"rolling\". Also, please take those things off."
-    luke wink -glasses hip "Hey don't smoke kids."
-    kota angry raised "Please add a comma to what you just said..."
+    show luke:
+        ease 1.5 xcenter 1.5
+    luke wink -glasses hip "Can't hear ya I'm already heading out."
+    hide luke
+    show luke phone bandanna cocky:
+        xcenter .75 yalign .3
+    kota angry raised "Hey! You should have added a comma to what you just said!"
+    luke "Can't hear you over the parrrrttyyyyy!!!"
+    kota sad "Will you ever stop showing off?"
     play sound laugh
     pause 0.5
     # This ends the game.
